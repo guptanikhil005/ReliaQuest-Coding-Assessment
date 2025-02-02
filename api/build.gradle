@@ -2,8 +2,29 @@ plugins {
     id 'project-conventions'
 }
 
+configurations.all {
+    // Resolve logging conflicts
+    exclude group: 'org.gradle', module: 'gradle-logging'
+    exclude group: 'org.apache.logging.log4j'
+    exclude group: 'java.util.logging'
+    exclude group: 'org.slf4j', module: 'slf4j-simple'
+    exclude group: 'org.slf4j', module: 'slf4j-jdk14'
+}
+
 dependencies {
+    // Existing dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.retry:spring-retry:1.3.1'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework:spring-aop'
+    implementation 'org.aspectj:aspectjweaver:1.9.19'
+
+    // Explicit logging dependencies
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+    implementation 'org.slf4j:slf4j-api:2.0.12'
+
+    // Add web starter if not already in project-conventions
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 }
 
 springBoot {
