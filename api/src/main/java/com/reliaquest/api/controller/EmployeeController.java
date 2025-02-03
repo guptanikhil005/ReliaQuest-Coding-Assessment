@@ -12,6 +12,16 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+/**
+ * REST Controller for employee-related operations.
+ *
+ * Provides endpoints for retrieving, creating, and deleting employees.
+ *
+ * @author Nikhil
+ * @version 1.0
+ */
+
 @RestController
 @RequestMapping("/api/v1/employees")
 public class EmployeeController implements IEmployeeController<Employee, EmployeeRequest> {

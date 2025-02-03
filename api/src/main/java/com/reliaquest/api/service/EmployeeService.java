@@ -20,6 +20,16 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class for managing employee-related operations through a REST API.
+ *
+ * This service provides CRUD operations for employee.
+ *
+ * @author Nikhil
+ * @version 1.0
+ */
+
+
 @Slf4j
 @Service
 public class EmployeeService {
@@ -36,6 +46,13 @@ public class EmployeeService {
         this.headers = new HttpHeaders();
         this.headers.setContentType(MediaType.APPLICATION_JSON);
     }
+    /**
+     * Retrieves all employees from the API.
+     *
+     *
+     * @return List of all employees or null if an error occurs
+     * @throws RateLimitExceededException if API rate limit is exceeded
+     */
 
     @Retryable(
             value = { RateLimitExceededException.class },
@@ -57,6 +74,15 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * Retrieves a specific employee by their ID.
+     *
+     * @param id Unique identifier of the employee
+     * @return Employee object or null if not found or an error occurs
+     * @throws RateLimitExceededException if API rate limit is exceeded
+     * @throws EmployeeNotFoundException if the employee with given ID is not found
+     */
+
     @Retryable(
             value = { RateLimitExceededException.class },
             maxAttempts = MAX_RETRY_ATTEMPTS,
@@ -77,6 +103,15 @@ public class EmployeeService {
             return null;
         }
     }
+
+    /**
+     * Creates a new employee in the system.
+
+     *
+     * @param employeeRequest Request object containing employee details
+     * @return Created Employee object or null if creation fails
+     * @throws RateLimitExceededException if API rate limit is exceeded
+     */
 
     @Retryable(
             value = { RateLimitExceededException.class },
@@ -101,6 +136,15 @@ public class EmployeeService {
             return null;
         }
     }
+
+    /**
+     * Deletes an employee by their ID.
+     *
+     * @param id Unique identifier of the employee to delete
+     * @return Name of the deleted employee or null if deletion fails
+     * @throws RateLimitExceededException if API rate limit is exceeded
+     * @throws EmployeeNotFoundException if the employee with given ID is not found
+     */
 
     @Retryable(
             value = { RateLimitExceededException.class },
